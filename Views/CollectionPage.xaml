@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kolekcje.Views.CollectionPage"
+             Title="CollectionPage"
+             x:Name="contentPage">
+
+    <Shell.TitleView>
+        <Grid>
+            <Label Text="Witaj w zarządzaniu kolekcją" x:Name="Headbar"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <StyleSheet Source="/Resources/Styles/CollectionPage.css" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <HorizontalStackLayout x:Name="Buttons">
+                    <Entry x:Name="AddItem" Text="{Binding ItemName}" Placeholder="Podaj nazwe przedmiot"/>
+                    <Button StyleClass="Buttons" Text="Dodaj przedmiot" Clicked="AddItem_Clicked" />
+                    <Button StyleClass="Buttons" Text="Usuń kolekcję" Clicked="CollectionDelete_Clicked"/>
+                </HorizontalStackLayout>
+
+                
+            </VerticalStackLayout>
+
+            <CollectionView 
+            x:Name="collectionViewItems" 
+            ItemsSource="{Binding All_Collections}"
+            SelectionMode="Single" 
+            SelectionChanged="ItemEdit"
+            ItemsLayout="VerticalList">
+
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <Label x:Name="ItemName" StyleClass="ItemDataLabels" Text="{Binding ItemName}" FontSize="Large" WidthRequest="200"/>
+                            <Button StyleClass="Buttons" Text="Usuń rzecz z listy" Clicked="DeleteItem_Clicked" Background="#2c2b2b" TextColor="#0ba713" BindingContext="{Binding .}"/>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

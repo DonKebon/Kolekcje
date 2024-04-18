@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kolekcje.Views.AllCollectionsPage"
+             Title="AllCollectionsPage"
+             x:Name="contentPage"
+             >
+
+    <Shell.TitleView>
+        <Grid>
+            <Label Text="Witam w aplikacji do zarządzania kolekcjami" x:Name="Headbar"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <StyleSheet Source="/Resources/Styles/AllColletionsPage.css" />
+    </ContentPage.Resources>
+
+    <CollectionView x:Name="collectionViewCollections"
+                    ItemsSource="{Binding All_Collections}"
+                    SelectionMode="Single" 
+                    SelectionChanged="CollectionChoice" 
+                    ItemsLayout="VerticalList">
+
+        <CollectionView.Header>
+            <HorizontalStackLayout x:Name="Header" HorizontalOptions="Center" >
+                <Label Text="Dodaj własną kolekcję: "/>
+                <Entry Placeholder="Nazwa kolekcji" x:Name="AddColectionEntry" Text="{Binding CollectionName}"/>
+                <Button x:Name="AddCollectionButton" Text="Dodaj kolekcję" Clicked="AddCollection_Clicked" />
+            </HorizontalStackLayout>
+        </CollectionView.Header>
+
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame x:Name="FrameOfLabels">
+                    <Label MaximumWidthRequest="500" x:Name="labele" Text="{Binding CollectionName}"></Label>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
